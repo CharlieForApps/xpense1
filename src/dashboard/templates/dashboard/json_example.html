@@ -1,0 +1,230 @@
+{% extends "base.html" %}
+
+{% block head_title %}Expense | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+
+<br> <br> <br> 
+
+      <div class="container">
+        <div class="row justify-content-center"> 
+              <div class="col-12 col-sm-12 col-md-8 col-lg-5 order-1  order-sm-1 pr-1 text-center shadow p-3 mb-5 bg-white rounded">
+                <P> 30 Days Expense </P>
+                <script>
+
+                $(document).ready(function(){
+
+                  function renderChart(id, data, labels, backgroundColor){
+                    // var ctx = document.getElementById("fourWeekSales").getContext('2d');
+                    var ctx = $('#' + id)
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Expenses',
+                                data: data,
+                                backgroundColor: backgroundColor,//['rgba(230,66,32,1)'],
+                                // [
+                                //     //'rgba(255, 99, 132, 0.2)',
+                                //     // 'rgba(54, 162, 235, 0.2)',
+                                //     // 'rgba(255, 206, 86, 0.2)',
+                                //     // 'rgba(75, 192, 192, 0.2)',
+                                //     // 'rgba(153, 102, 255, 0.2)',
+                                //     // 'rgba(255, 159, 64, 0.2)'
+                                // ],
+                                borderColor: [
+                                    // 'rgba(255,99,132,1)',
+                                    // 'rgba(54, 162, 235, 1)',
+                                    // 'rgba(255, 206, 86, 1)',
+                                    // 'rgba(75, 192, 192, 1)',
+                                    // 'rgba(153, 102, 255, 1)',
+                                    // 'rgba(255, 159, 64, 1)'
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                  }
+
+                  var url = '/dashboard/data/'
+                  var method = 'GET'
+                  var data = {}
+
+                  $.ajax({
+                    url: url,
+                    method: method,
+                    data: data,
+                    success: function(responseData){
+                      console.log(responseData)   
+                      renderChart("fourWeekSales",responseData.data, responseData.labels, responseData.backgroundColor)                   
+                    }, error: function(error){
+                      $.alert("An error occured")
+                    }
+                  })
+                })
+
+                
+                </script>
+                <canvas class='myChart' id="fourWeekSales" data-type='4weeks' width="300" height="300"></canvas>
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-8 col-lg-1 order-1  order-sm-1 bg-secondary pr-1 text-white text-center">
+            </div>
+
+            <div class="col-12 col-sm-12 col-md-8 col-lg-5 order-6 text-center shadow p-3 mb-5 bg-white rounded">
+                <P> 30 Days Expense per Category </P>
+             <script>
+
+                $(document).ready(function(){
+
+                  function renderChart(id, data, labels, backgroundColor){
+
+                    var ctx = $('#' + id)
+                    var graphColors = [];
+
+                    var internalDataLength = data.length;
+                    i = 0;
+                    while (i <= internalDataLength) {
+                        var randomR = Math.floor((Math.random() * 130) + 100);
+                        var randomG = Math.floor((Math.random() * 130) + 100);
+                        var randomB = Math.floor((Math.random() * 130) + 100);
+                      
+                        var graphBackground = "rgb(" 
+                                + randomR + ", " 
+                                + randomG + ", " 
+                                + randomB + ")";
+                        graphColors.push(graphBackground);            
+                        
+                      i++;
+                    };
+
+                    var myChart = new Chart(ctx, {
+                        type: 'doughnut',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Expenses',
+                                data: data,
+                                backgroundColor: graphColors,
+                                borderColor: [                                  
+                                ],                                
+                                borderWidth: 2
+                            }]
+                        },
+                        options: {
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                  }
+
+                    var options = {
+                        cutoutPercentage: 25,
+                        responsive: true
+                        
+                    };
+
+                  var url = '/dashboard/datapie/'
+                  var method = 'GET'
+                  var data = {}
+
+                  $.ajax({
+                    url: url,
+                    method: method,
+                    data: data,
+                    success: function(responseData){
+                      console.log(responseData)   
+                      renderChart("expensePie",responseData.data, responseData.labels, responseData.backgroundColor)                   
+                    }, error: function(error){
+                      $.alert("An error occured")
+                    }
+                  })
+                })
+
+                
+                </script>
+                <canvas class='myChart' id="expensePie" data-type='4weeks' width="300" height="300"></canvas>
+            </div>
+
+        <div class="col-12 col-sm-12 col-md-8 col-lg-6 order-6 text-center shadow p-3 mb-5 bg-white rounded" >
+          
+            <P> Budget Vs. Expense </P>
+                <script>
+
+                $(document).ready(function(){
+
+                  function renderChart(id, budget, expense, labels, backgroundColor, backgroundColor2){                   
+                    var ctx = $('#' + id)
+                    var myChart = new Chart(ctx, {
+                        type: 'bar',
+                        data: {
+                            labels: labels,
+                            datasets: [{
+                                label: 'Budget',
+                                data: budget,
+                                backgroundColor: backgroundColor,                    
+                                borderColor: [                                
+                                ],
+                                borderWidth: 1
+                            }, {
+                                label: 'Expenses',
+                                data: expense,
+                                backgroundColor: backgroundColor2,                    
+                                borderColor: [                                
+                                ],
+                                borderWidth: 1
+                            }]
+                        },
+                        options: {  
+                            responsive: true,                           
+                            scales: {
+                                yAxes: [{
+                                    ticks: {
+                                        beginAtZero:true
+                                    }
+                                }]
+                            }
+                        }
+                    });
+                  }
+
+                  var url = '/dashboard/databar'
+                  var method = 'GET'
+                  var data = {}
+
+                  $.ajax({
+                    url: url,
+                    method: method,
+                    data: data,
+                    success: function(responseData){
+                      console.log(responseData)   
+                      renderChart("barchart",responseData.budget, responseData.expense, responseData.labels, responseData.backgroundColor, responseData.backgroundColor2)                   
+                    }, error: function(error){
+                      $.alert("An error occured")
+                    }
+                  })
+                })
+
+                </script>
+                <canvas class='myChart' id="barchart" data-type='barchart' width="300" height="300"></canvas>
+        </div>
+
+        </div>
+      </div>
+
+{% endblock %}

@@ -1,0 +1,86 @@
+{% load static %}
+<!-- <div class='fixed-top'> -->
+  <div class='container fixed-top'>
+<!-- <h1>XpenseAppV1.com</h1>
+
+<a href='{% url "home" %}'>Home</a>
+{% if request.user.is_authenticated %}
+<a href='{% url "category:list" %}'>Category</a>
+
+{% endif %}
+<a href='{% url "about" %}'>About</a>
+<a href='{% url "contact" %}'>Contact</a> -->
+<!-- <img src="{{MEDIA_URL}}/image.png" > -->
+<!-- class="img-responsive" -->
+
+
+<nav class="navbar navbar-default navbar-expand-lg fixed-top navbar-dark bg-dark text-white  ">
+  <a class="navbar-brand  text-white" href='{% url "home" %}'> <img src="{% static 'category/jigsaw.svg' %}" alt=""  width="30" height="30" class="d-inline-block align-top " alt=""> Everyday Apps </a>
+  <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarNavDropdown" aria-controls="navbarNavDropdown" aria-expanded="false" aria-label="Toggle navigation">
+    <span class="navbar-toggler-icon"></span>
+  </button>
+  <div class="collapse navbar-collapse text-white" id="navbarNavDropdown" >
+    <ul class="navbar-nav ml-auto">
+      <li class="nav-item ">
+        <a class="nav-link" href='{% url "home" %}'>Home</a>
+      </li>
+      {% if request.user.is_authenticated %}
+
+        <li class="nav-item">
+          <a class="nav-link" href='{% url "expense:list" %}?q= '>Expense</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='{% url "budget:list" %}?q= '>Budget</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='{% url "books:book_list" %}'>Books</a>
+        </li>
+        <li class="nav-item">
+          <a class="nav-link" href='{% url "dashboard:json_example" %}'>Dashboard</a>
+        </li>
+        <li class="nav-item dropdown ">
+          <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+            References
+          </a>
+          <div class="dropdown-menu bg-dark " aria-labelledby="navbarDropdownMenuLink">
+            <a class="dropdown-item text-white" href='{% url "category:list" %}?q= '>Category</a>
+            <a class="dropdown-item text-white" href='{% url "period:list" %}?q= '>Period</a>
+          </div>
+        </li>
+
+      
+      {% endif %}
+<!--       <li class="nav-item dropdown">
+        <a class="nav-link dropdown-toggle" href="#" id="navbarDropdownMenuLink2" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
+          About Us
+        </a>
+        <div class="dropdown-menu" aria-labelledby="navbarDropdownMenuLink2">
+          <a class="dropdown-item" href='{% url "about" %}'>MyApps</a>
+          <a class="dropdown-item" href='{% url "contact" %}'>Contact Us</a>
+        </div>
+      </li> -->
+      <li class="nav-item">
+        <a class="nav-link" href='{% url "about" %}'>About</a>
+      </li>
+      {% if request.user.is_authenticated %}
+      <li class="nav-item">
+        <a class="nav-link" href='{% url "logout" %}'>Logout</a>
+      </li>
+      {% else %}
+        <li class="nav-item">
+        <a class="nav-link" href='{% url "login" %}'>Login</a>
+      </li> 
+              <li class="nav-item">
+        <a class="nav-link" href='{% url "register" %}'>Sign-up</a>
+      </li>    
+      {% endif %}
+
+    </ul>
+    {% if request.user.is_authenticated %}
+      <span class="navbar-text text-white text-capitalize">
+        <h8> | Welcome : {{ user }} </h8>
+      </span>
+    {% endif %}
+  </div>
+</nav>
+</div>

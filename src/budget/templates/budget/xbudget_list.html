@@ -1,0 +1,40 @@
+{% extends "base.html" %}
+
+{% block head_title %}Expense | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<h1>My Budget</h1><br>
+<a class="btn btn-warning btn-sm" href="{% url "budget:create" %}" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Budget </a>
+<ui>
+
+	<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Category</th>
+      <th scope="col">Period</th>
+      <th scope="col">Amount</th>
+      <th scope="col">Remarks</th>
+      <th scope="col">Delete</th>
+    </tr>
+  </thead>
+  <tbody>
+  	{% for obj in object_list %}
+    <tr>
+      <th scope="row">{{ obj.pk }}</th>
+      <td><a href='{{ obj.get_absolute_url }}'>{{ obj.category }}</a></td>
+      <td>{{ obj.period }}</td>
+      <td>{{ obj.amount }}</td>
+      <td>{{ obj.remarks }}</td>
+            <td><a class="btn btn-secondary btn-sm" href='{{ obj.get_absolute_url_delete }}'><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+    </tr>
+    	{% empty %}
+
+	{% endfor %}
+   
+  </tbody>
+</table>
+<a class="btn btn-warning btn-sm" href="{% url "budget:create" %}" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Budget </a>
+
+</ui>
+{% endblock %}

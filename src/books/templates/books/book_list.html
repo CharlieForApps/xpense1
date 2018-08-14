@@ -1,0 +1,62 @@
+{% extends 'base.html' %}
+
+{% load static %}
+
+{% block javascript %}
+  
+<script type="javascript">
+</script>
+{% endblock %}
+
+{% block content %}
+<br>
+<br>
+
+
+<div class='container bg-secondary pt-3'>
+    <div class='row bg-secondary mr-1 ml-1 pt-1'>
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 order-6 mt-1 shadow p-3 mb-1 bg-warning rounded">
+        <h2 class="page-header "> Books</h2>
+      </div>
+
+      <div class="col-12 col-sm-12 col-md-12 col-lg-12 order-6 mt-1 shadow p-3 mb-1 bg-light rounded ">
+          <p>
+            <button type="button" class="btn btn-warning js-create-book" data-url="{% url 'books:book_create' %}">
+              <span class="fa fa-plus-circle"></span>
+              New book
+            </button>
+          </p>
+      <!-- </div> -->
+      <!-- <div class="col-12 col-sm-12 col-md-12 col-lg-12 order-6 mt-3 shadow p-3 mb-3 bg-light "> -->
+          <table class="table table-hover border  table-sm pb-3" id="book-table">
+            <thead>
+              <tr>
+                <th>#</th>
+                <th>Title</th>
+                <th>Author</th>
+                <th>Type</th>
+                <th>Publication date</th>
+                <th>Pages</th>
+                <th>Price</th>
+                <th>Edit/Delete</th>
+                <th></th>
+              </tr>
+            </thead>
+            <tbody>
+              {% include 'books/partial_book_list.html' %}
+            </tbody>
+          </table>
+      </div>
+    </div>
+</div>
+
+  <div class="modal fade" id="modal-book">
+    <div class="modal-dialog">
+      <div class="modal-content">
+
+      </div>
+    </div>
+  </div>
+
+{% endblock %}
+

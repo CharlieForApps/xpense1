@@ -1,0 +1,101 @@
+{% extends "base.html" %}
+
+{% block content %}
+{% load static %}
+
+<style type="text/css">
+
+
+  /*.card {*/
+    /*box-shadow: 0px 3px 0px #fd7e14;*/
+    /*opacity: 0.6;*/
+/*    transition: top 0.3s;*/
+    
+  /*}*/
+/*#testcont{
+  opacity: 3
+}
+#testcont2{
+  opacity: 3
+}
+#testcont3{
+  opacity: 3
+}*/
+#home-section {
+  background-image: url({% static 'category/profilepic1.jpg' %});
+  background-repeat: no-repeat;
+  background-size: cover;
+  background-attachment: fixed;
+  min-height: 700px;
+}
+
+</style>
+<br>
+<br>
+<br>
+{% load widget_tweaks %}
+<body style="background-image:url({% static 'category/profilepic1.jpg' %})">
+<div class='container bg-white' id="testcont">
+  <div class="row justify-content-center bg-secondary " id="testcont2"> 
+        <div class="col-12 col-sm-12 col-md-8 col-lg-4 order-6 bg-secondary  justify-content-center " id="testcont3">
+                <div class="card text-center bg-light mb-3 d-flex h-100 v-100" >
+                <!--       <img class="card-img-top" src="{% static 'category/LoginImage.jpg' %}" alt="Card image cap row justify-content-center align-self-center"> -->
+                  <div class="card-header">{% if form.errors %}
+                <p>Your username and password didn't match. Please try again.</p>
+                {% endif %}
+
+                {% if next %}
+                    {% if user.is_authenticated %}
+                    <p>Your account doesn't have access to this page. To proceed,
+                    please login with an account that has access.</p>
+                    {% else %}
+                    <p><b>Please enter username and password:</b></p>
+                    {% endif %}
+                {% endif %}</div>
+                  <div class="card-body">
+                    <h5 class="card-title"><div class="row justify-content-center"><form method="post" action="{% url 'login' %}">
+                {% csrf_token %}
+                <!-- {{ form.as_p }} -->
+
+                      {% for field in form.visible_fields %}
+                          <div class="form-group">
+                            <h6>{{ field.label_tag }}</h6>
+
+                            {% if form.is_bound %}
+                              {% if field.errors %}
+                                {% render_field field class="form-control is-invalid form-control-sm" %}
+                                {% for error in field.errors %}
+                                  <div class="invalid-feedback">
+                                    {{ error }}
+                                  </div>
+                                {% endfor %}
+                              {% else %}
+                                {% render_field field class="form-control is-valid form-control-sm" %}
+                              {% endif %}
+                            {% else %}
+                              {% render_field field class="form-control form-control-sm" %}
+                            {% endif %}
+
+                            {% if field.help_text %}
+                              <small class="form-text text-muted">{{ field.help_text }}</small>
+                            {% endif %}
+                          </div>
+                        {% endfor %}
+
+
+                <!-- <input type="submit" value="login" /> -->
+                        <button class="btn btn-warning align-self-center" type="submit" value="Save" >
+                            Proceed
+                        </button>
+                        <input type="hidden" name="next" value="{{ next }}" />
+                </form></div></h5>
+                    <p class="card-text"></p>
+                  </div>
+                </div>
+        </div>
+  </div>
+</div>
+</body>
+{# Assumes you setup the password_reset view in your URLconf #}
+
+{% endblock %}

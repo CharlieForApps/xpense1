@@ -1,0 +1,87 @@
+{% extends "base.html" %}
+
+{% block head_title %}Category | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<!-- {{ user.username }} fas fa-search-->
+<!-- <div class="container-fluid">
+<h2>My Category</h2><br>
+</div> -->
+<!-- 
+<form class='form' method='GET' action='.'>
+  <input type='text' placeholder="Search.." name='q' value='{{ request.GET.q }}'>
+  <button class='btn btn-warning btn-sm' type='submit'><i class="fas fa-search 2x" aria-hidden="true"></i> Search</button>
+</form> -->
+<br>
+<br>
+<br>
+<div class="card">
+  <h5 class="card-header">My Category</h5>
+  <div class="card-body">
+    <h5 class="card-title">
+<div class="container-fluid">
+  <form class='form' method='GET' action='.'>
+      <div class="input-group mb-2">
+            <div class="col-xs-4">
+              <input type="text" class="form-control" 
+              placeholder="Search.." aria-label="" aria-describedby="basic-addon1" name='q' value='{{ request.GET.q }}' id="ex3">
+            </div>              
+              <div class="input-group-prepend">
+                  <button class="btn btn-outline-warning btn-sm" type="submit"><i class="fas fa-search 2a" aria-hidden="true"></i> Search</button>
+              </div>
+      </div>
+  </form>
+</div><hr></h5>
+    <p class="card-text"><div class="container-fluid">
+  <a class="btn btn-warning btn-sm" href="{% url "category:create" %}" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Category </a>
+</div></p>
+    <div class="container-fluid">
+  <table class="table table-hover border border-secondary table-sm">
+  <thead class="thead-light" >
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Delete</th>
+      <!-- <th scope="col">Delete2</th> -->
+    </tr>
+  </thead>
+  <tbody>
+    {% for mycategory in object_list %}
+    <tr>
+      <th scope="row">{{ mycategory.pk }}</th>
+      <td><a href='{{ mycategory.get_absolute_url }}'>{{ mycategory.name }}</a></td>
+      <td>{{ mycategory.cattype }}</td>
+      <td><a class="btn btn-secondary btn-sm" href='{{ mycategory.get_absolute_url_delete }}'><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+    </tr>
+      {% empty %}
+
+  {% endfor %}
+ <!--   <script>
+   var elm = document.getElementById('delete-object');
+    var objectID = elm.getAttribute('data-object-id');
+    var resultDiv = document.getElementById('result');
+    elm.addEventListener('click', function() {
+  
+  var ask = confirm('r u sure?');
+  if (ask && objectID) {
+    var r = "Page will be redirected to </category/delete/" + objectID + "/>";
+    resultDiv.textContent = r;
+  } else {
+    resultDiv.textContent = "User cancelled the dialog box...";
+  }
+  return false;
+}); </script> -->
+  </tbody>
+</table>
+</div>
+<div class="container-fluid">
+  <a class="btn btn-warning btn-sm" href="{% url "category:create" %}" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Category </a>
+</div>
+  </div>
+</div>
+<br>
+<br>
+<br>
+<br>
+{% endblock %}

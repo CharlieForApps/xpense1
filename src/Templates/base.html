@@ -1,0 +1,169 @@
+
+<!DOCTYPE html>
+<html lng=eng>
+<head>
+	<title>{% block head_title %}EverydayApps.com{% endblock head_title %}</title>
+	{% include 'snippets/css.html' %}
+	{% include 'snippets/js.html' %}
+	{% load static %}
+</head>
+
+<style type="text/css">
+	#menu{
+	  position: fixed;
+	  right: 2%;
+	  top: 75%;
+	  width: 6em;
+	  margin-top: -2.5em;
+	}
+
+	.navbar {
+		box-shadow: 0px 3px 0px #fd7e14;
+		opacity: 0.9;
+		transition: top 0.3s;
+		
+	}
+@media (max-width: 767px) {
+    .dropdown-menu {
+        position: static;
+        float: none;
+        width: 100%;
+        margin-top: 0;
+        background-color: transparent;
+        border: 1;
+        -webkit-box-shadow: none;
+        box-shadow: 1;
+    }
+}
+.dropdown .dropdown-menu .dropdown-item:active, .dropdown .dropdown-menu .dropdown-item:hover{background-color: grey !important;}
+</style>
+<body>
+{% include 'snippets/nav.html' %}
+
+<div class='container-fluid bg-secondary' >
+	<div class='container bg-secondary'  style="min-height:800px;">
+	{% block content %}
+	{%  endblock content %}
+	<div class="container bg-dark text-white mt-4 bg-secondary p-4"> Powered by Python Django </div> 
+	</div>
+
+</div>
+<!-- <div class="container fixed-bottom bg-dark text-white"> Powered by Python Django </div> -->
+
+<!-- <div class="d-flex bg-secondary fixed-bottom">
+	<div class="ml-auto">Powered by Python Django</div>
+</div> -->	
+<div id=menu class="container bg-secondary text-center">
+	<img class="card-img-top" src="{% static 'category/python3.png' %}" alt="Card image cap row justify-content-center align-self-center">
+	<img class="card-img-top" src="{% static 'category/django1.png' %}" alt="Card image cap row justify-content-center align-self-center">
+	<img class="card-img-top" src="{% static 'category/bootstrap1.png' %}" alt="Card image cap row justify-content-center align-self-center">	
+
+</div>
+<!-- <span class="fixed-bottom bg-dark text-white">fixed top</span> -->
+  </body>
+  <script type="text/javascript">
+
+$(function () {
+
+  /* Functions */
+
+  var loadForm = function () {
+    var btn = $(this);
+    $.ajax({
+      url: btn.attr("data-url"),
+      type: 'get',
+      dataType: 'json',
+      beforeSend: function () {
+        $("#modal-book .modal-content").html("");
+        $("#modal-book").modal("show");
+      },
+      success: function (data) {
+        $("#modal-book .modal-content").html(data.html_form);
+      }
+    });
+  };
+
+  var saveForm = function () {
+    var form = $(this);
+    $.ajax({
+      url: form.attr("action"),
+      data: form.serialize(),
+      type: form.attr("method"),
+      dataType: 'json',
+      success: function (data) {
+        if (data.form_is_valid) {
+          $("#book-table tbody").html(data.html_book_list);
+          $("#modal-book").modal("hide");
+        }
+        else {
+          $("#modal-book .modal-content").html(data.html_form);
+        }
+      }
+    });
+    return false;
+  };
+
+
+  /* Binding */
+
+  // Create book
+  $(".js-create-book").click(loadForm);
+  $("#modal-book").on("submit", ".js-book-create-form", saveForm);
+
+  // Update book
+  $("#book-table").on("click", ".js-update-book", loadForm);
+  $("#modal-book").on("submit", ".js-book-update-form", saveForm);
+
+  // Delete book
+  $("#book-table").on("click", ".js-delete-book", loadForm);
+  $("#modal-book").on("submit", ".js-book-delete-form", saveForm);
+
+});
+    
+$(document).ready(function() {
+  // dropdown animation
+  $('.dropdown').on('show.bs.dropdown', function(e) {
+    $(this).find('.dropdown-menu').first().stop(true, true).slideDown(250);
+  });
+  $('.dropdown').on('hide.bs.dropdown', function(e) {
+    $(this).find('.dropdown-menu').first().stop(true, true).slideUp(0);
+  });
+});
+
+  $(function () {
+  var lastScrollTop = 0;
+  var $navbar = $('.navbar');
+
+  $(window).scroll(function(event){
+    var st = $(this).scrollTop();
+
+    if (st > lastScrollTop) { // scroll down
+      
+      // use this is jQuery full is used
+      $navbar.fadeOut()
+      
+      // use this to use CSS3 animation
+      // $navbar.addClass("fade-out");
+      // $navbar.removeClass("fade-in");
+      
+      // use this if no effect is required
+      // $navbar.hide();
+    } else { // scroll up
+      
+      // use this is jQuery full is used
+      $navbar.fadeIn()
+      
+      // use this to use CSS3 animation
+      // $navbar.addClass("fade-in");
+      // $navbar.removeClass("fade-out");
+      
+      // use this if no effect is required
+      // $navbar.show();
+    }
+    lastScrollTop = st;
+  });
+});
+
+</script>
+
+  </html>

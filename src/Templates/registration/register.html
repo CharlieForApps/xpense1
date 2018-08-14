@@ -1,0 +1,80 @@
+{% extends "base.html" %}
+
+{% block content %}
+<br>
+<br>
+<br>
+<div class='container'>
+	<div class='row'>
+		<div class="col-12 col-sm-0 col-md-4 col-lg-4 order-1 bg-secondary">
+		</div>
+		<div class='col-12 col-sm-12 col-md-4 col-lg-4 order-2 shadow p-3 mb-5 bg-white rounded'>
+			<h1>Sign-up</h1>
+			<hr>
+			<form method="post" action="{% url 'register' %}">
+			{% csrf_token %}
+
+
+			{% load widget_tweaks %}
+		<!-- 	{{ form.as_p }} -->
+			{% for hidden_field in form.hidden_fields %}
+			  {{ hidden_field }}
+			{% endfor %}
+
+			{% if form.non_field_errors %}
+			  <div class="alert alert-danger" role="alert">
+			    {% for error in form.non_field_errors %}
+			      {{ error }}
+			    {% endfor %}
+			  </div>
+			{% endif %}
+
+			{% for field in form.visible_fields %}
+			  <div class="form-group">
+			    <strong>{{ field.label_tag }}</strong>
+
+			    {% if form.is_bound %}
+			      {% if field.errors %}
+			        {% render_field field class="form-control is-invalid" %}
+			        {% for error in field.errors %}
+			          <div class="invalid-feedback">
+			            {{ error }}
+			          </div>
+			        {% endfor %}
+			      {% else %}
+			        {% render_field field class="form-control is-valid" %}
+			      {% endif %}
+			    {% else %}
+			      {% render_field field class="form-control" %}
+			    {% endif %}
+
+			    {% if field.help_text %}
+			      <small class="form-text text-muted">{{ field.help_text }}</small>
+			    {% endif %}
+			  </div>
+			{% endfor %}
+
+			<!-- <input type="submit" value="Register" /> -->
+
+			<div class="d-flex flex-row justify-content-center">
+				<div class="p-2">
+					<button class="btn btn-warning align-self-center" type="submit" value="Save" >
+						Register new user
+					</button>
+				</div>		
+			</div>
+			<div class="d-flex flex-row justify-content-center">
+				<div class="p-2">
+					<input type="hidden" name="next" value="{{ next }}" />
+					<p>Click here to <a href='{% url "login" %}'>Login</a></p>
+				</div>
+			</div>	
+			</form>
+<!-- 			<br> -->
+
+		</div>
+		<div class="col-12 col-sm-0 col-md-4 col-lg-4 order-3 bg-secondary">
+		</div>
+	</div>
+</div>
+{% endblock %}

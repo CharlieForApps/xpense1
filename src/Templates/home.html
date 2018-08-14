@@ -1,0 +1,111 @@
+{% extends "base.html" %}
+{% block head_title %}{{ block.super }} {% endblock head_title %}
+{% block content %}
+
+<br>
+<br>
+<br>
+{% load static %}
+<!-- <div class="container">
+	<div class="row">
+		<div class="col-12 col-sm-12 col-md-8 col-lg-3 order-12  order-sm-1" >
+			<div class="alert alert-light" role="alert">
+			  <strong>Well done!</strong> You successfully read this important alert message.
+			</div>
+		</div>
+		<div class="col-12 col-sm-12 col-md-8 col-lg-6 order-6">
+			<div class="alert alert-info" role="alert">
+			  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+			</div>
+		</div>
+		<div class="col-12 col-sm-12 col-md-8 col-lg-3 order-1 order-sm-12" >
+			<div class="alert alert-warning" role="alert">
+			  <strong>Heads up!</strong> This alert needs your attention, but it's not super important.
+			</div>
+		</div>
+	</div>
+</div> -->
+
+ <div class='container bg-primary' >
+    <div class='row'>
+<!-- 	      <div class="col-12 col-sm-12 col-md-8 col-lg-3 order-12  order-sm-1 bg-primary">
+	testing
+	      </div> -->
+
+	      <div class="col-12 col-sm-12 col-md-8 col-lg-8 order-6 bg-light">
+				<br>
+				<div class="card shadow p-3 mb-5 bg-white rounded">
+		          <div class="card-header">
+		          <b>Zen of Python</b>
+		          </div>
+		          <div class="card-body ">
+		            <blockquote class="blockquote mb-0">
+	
+		              <p>Beautiful is better than ugly. <br>
+						Explicit is better than implicit. <br>
+						Simple is better than complex. <br>
+						Complex is better than complicated. <br>
+						Flat is better than nested. <br>
+						Sparse is better than dense. <br>
+						Readability counts. <br>
+						Special cases aren't special enough to break the rules. <br>
+						Although practicality beats purity. <br>
+						Errors should never pass silently. <br>
+						Unless explicitly silenced. <br>
+						In the face of ambiguity, refuse the temptation to guess. <br>
+						There should be one—and preferably only one—obvious way to do it. <br>
+						Although that way may not be obvious at first unless you're Dutch. <br>
+						Now is better than never.<br>
+						Although never is often better than right now.[n 1]<br>
+						If the implementation is hard to explain, it's a bad idea.<br>
+						If the implementation is easy to explain, it may be a good idea.<br>
+						Namespaces are one honking great idea—let's do more of those!</p>
+		              <footer class="blockquote-footer">Tim Peters<cite title="Source Title"></cite></footer>
+		            </blockquote>
+		          </div>
+		        </div>
+		      </div>  
+
+
+		  <div class="col-12 col-sm-12 col-md-4 col-lg-4 order-1 order-sm-12 bg-warning">
+
+		  		<br>		
+		    <div class="card shadow p-3 mb-5 bg-white rounded">
+		          <div class="card-header">
+		          <b>Developer</b>
+		          </div>
+		          <div class="card-body">
+		          	<img class="card-img-top" src="{% static 'category/profilepic1.jpg' %}" alt="Card image cap row justify-content-center align-self-center">
+		            <!-- <blockquote class="blockquote mb-0"> -->
+		            	<br><br>
+		              <p>Hi there! my name is <strong>Charlie Icamina</strong> and I am a Python enthusiast. <br> 
+		              	I love Python because of its simplicity... <br></p>
+		              <!-- <footer class="blockquote-footer"><cite title="Source Title"></cite></footer> -->
+		            <!-- </blockquote> -->
+		          </div>
+		        </div>
+				<div class="card shadow p-3 mb-5 bg-white rounded">
+		          <div class="card-header">
+		          <b>Qoutes</b>
+		          </div>
+		          <div class="card-body">
+		            <!-- <blockquote class="blockquote mb-0"> -->
+		              <p><b>"Nothing works better than just improving your product."</b></p>
+		              <span>-- Joel Spolsky | CEO and Co-founder Stock Overflow/LinkedIn.</span>
+		              <hr>
+		              <p><b>"Motivation is what gets you started. Habit is what keeps you going."</b> </p>
+		              <span>-- Jim Rohn | Motivational Speaker. </span>
+		              <hr>
+		              <p><b>"Software is a great combination between artistry and engineering."</b> </p>
+		              <span>-- Bill Gates </span>
+		            <!-- </blockquote> -->
+		          </div>
+		        </div>
+		      </div>  
+		      <br>
+
+	      </div>
+
+    </div>
+  </div>
+{% endblock content %}

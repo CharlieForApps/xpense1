@@ -1,0 +1,11 @@
+{% extends "base.html" %}
+
+{% block head_title %}{{ form.instance.name }} | Expense | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<!-- <h1>{{form.instance.name}}</h1>
+
+	<hr\>
+	<h3>{{ title }}</h3> -->
+	{% include 'snippets/form-snippet.html' with form=form %}
+{% endblock %}

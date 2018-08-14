@@ -1,0 +1,57 @@
+{% extends "base.html" %}
+
+{% block head_title %}Category | {{ block.super }}{% endblock head_title %}
+
+{% block content %}
+<!-- {{ user.username }} -->
+<h1>My Category</h1><br>
+<form class='form' method='GET' action='.'>
+  <input type='text' placeholder="Search.." name='q' value='{{ request.GET.q }}'>
+  <button class='btn btn-primary btn-sm' type='submit'>Search</button>
+</form>
+<br>
+<a class="btn btn-warning btn-sm" href="{% url "category:create" %}" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Category </a>
+<ui>
+
+	<table class="table table-hover">
+  <thead>
+    <tr>
+      <th scope="col">#</th>
+      <th scope="col">Name</th>
+      <th scope="col">Category</th>
+      <th scope="col">Delete</th>
+      <!-- <th scope="col">Delete2</th> -->
+    </tr>
+  </thead>
+  <tbody>
+  	{% for obj in locations %}
+    <tr>
+      <th scope="row">{{ obj.pk }}</th>
+      <td><a href='{{ obj.get_absolute_url }}'>{{ obj.name }}</a></td>
+      <td>{{ obj.cattype }}</td>
+      <td><a class="btn btn-secondary btn-sm" href='{{ obj.get_absolute_url_delete }}'><i class="fa fa-trash" aria-hidden="true"></i></a></td>
+    </tr>
+    	{% empty %}
+
+	{% endfor %}
+ <!--   <script>
+   var elm = document.getElementById('delete-object');
+    var objectID = elm.getAttribute('data-object-id');
+    var resultDiv = document.getElementById('result');
+    elm.addEventListener('click', function() {
+  
+  var ask = confirm('r u sure?');
+  if (ask && objectID) {
+    var r = "Page will be redirected to </category/delete/" + objectID + "/>";
+    resultDiv.textContent = r;
+  } else {
+    resultDiv.textContent = "User cancelled the dialog box...";
+  }
+  return false;
+}); </script> -->
+  </tbody>
+</table>
+<a class="btn btn-warning btn-sm" href="{% url "category:create" %}" role="button"><i class="fa fa-plus-circle" aria-hidden="true"></i> Add Category </a>
+
+</ui>
+{% endblock %}
